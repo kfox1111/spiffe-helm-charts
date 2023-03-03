@@ -1,3 +1,4 @@
+{{ $namespace := .Release.Namespace }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -39,6 +40,22 @@ UpstreamAuthority:
       {{- end }}
 {{- end }}
 {{- end }}
+
+{{- with .Values.upstreamAuthority.certManager }}
+{{- if eq (.enabled | toString) "true" }}
+UpstreamAuthority
+  cert-manager:
+    plugin_data:
+      issuer_name: {{ .issuer_name | quote }}
+      issuer_kind: {{ .issuer_kind | quote }}
+      issuer_group: {{ .issuer_group | quote }}
+      namespace: {{ default $namespace .namespace | quote }}
+      {{- if ne .kube_config_file "" }}
+      kube_config_file: {{ .kube_config_file | quote }}
+      {{- end }}
+{{- end }}
+{{- end }}
+
 {{- end }}
 
 {{- define "spire-server.config-main-template" }}
