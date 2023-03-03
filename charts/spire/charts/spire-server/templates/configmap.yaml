@@ -1,4 +1,3 @@
-{{ $namespace := .Release.Namespace }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -7,6 +6,7 @@ metadata:
 data:
 
 {{- define "spire-server.config-plugins-template" }}
+{{ $namespace := .Release.Namespace }}
 DataStore:
   sql:
     plugin_data:
