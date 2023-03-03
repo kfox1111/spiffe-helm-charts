@@ -151,6 +151,7 @@ jobs:
 
       - name: Run chart-testing (install)
         run: |
+
           ct install --debug \
             --target-branch ${{ github.base_ref }} \
             --exclude-deprecated \
