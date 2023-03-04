@@ -11,5 +11,5 @@ done
 kubectl create configmap -n "$VALUES" spire-bundle-upstream --from-file=bundle.crt=bundle
 
 kubectl get nodes -o go-template='{{range .items}}{{printf "%s\n" .metadata.uid}}{{end}}' | while read line; do
-	kubectl exec -t spire-server-0 -n "${VALUES}-deps" -- /opt/spire/bin/spire-server entry create -spiffeID spiffe://example.org/example-cluster/nested-spire -parentID spiffe://example.org/spire/agent/k8s_psat/example-cluster/$line -selector k8s:pod-label:app.kubernetes.io/name:server -downstream -socketPath /run/spire/server-sockets/spire-server.sock
+	kubectl exec -t spire-server-0 -n "${VALUES}-deps" -- spire-server entry create -spiffeID spiffe://example.org/example-cluster/nested-spire -parentID spiffe://example.org/spire/agent/k8s_psat/example-cluster/$line -selector k8s:pod-label:app.kubernetes.io/name:server -downstream
 done
