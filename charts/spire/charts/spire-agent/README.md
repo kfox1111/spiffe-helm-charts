@@ -14,6 +14,7 @@ A Helm chart to install the SPIRE agent.
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| agentSocketPath | string | `"/run/spire/agent-sockets/spire-agent.sock"` | Override where the agent looks for the socket. Only used if socketMacroName is unchanged. |
 | bundleConfigMap | string | `"spire-bundle"` |  |
 | clusterName | string | `"example-cluster"` |  |
 | extraContainers | list | `[]` |  |
@@ -35,6 +36,7 @@ A Helm chart to install the SPIRE agent.
 | priorityClassName | string | `""` | Priority class assigned to daemonset pods |
 | resources | object | `{}` |  |
 | securityContext | object | `{}` |  |
+| server.address | string | `""` |  |
 | server.port | int | `8081` |  |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` |  |

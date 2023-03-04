@@ -18,14 +18,46 @@ spire-server:
   controllerManager:
     enabled: true
 
-spire-agent:
-  nameOverride: agent
+agent-main:
+  enabled: true
   bundleConfigMap: *bundleConfigMap
 
   clusterName: *clusterName
   trustDomain: *trustDomain
 
-spiffe-csi-driver: {}
+  # @ignored
+  socketMacroName: "spire.agent-socket-path.main"
+
+agent-upstream:
+  enabled: false
+  bundleConfigMap: spire-bundle-upstream
+
+  clusterName: *clusterName
+  trustDomain: *trustDomain
+
+  # @ignored
+  socketMacroName: "spire.agent-socket-path.upstream"
+
+  healthChecks:
+    port: 9981
+  telemetry:
+    prometheus:
+      port: 9989
+
+csi-driver-main:
+  enabled: true
+  # @ignored
+  socketMacroName: "spire.agent-socket-path.main"
+
+# Useful when you are setting up a Federated spire
+csi-driver-upstream:
+  enabled: false
+  healthChecks:
+    port: 9810
+  # @ignored
+  pluginName: upstream.csi.spiffe.io
+  # @ignored
+  socketMacroName: "spire.agent-socket-path.upstream"
 
 spiffe-oidc-discovery-provider:
   enabled: false

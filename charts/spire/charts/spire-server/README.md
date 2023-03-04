@@ -74,6 +74,7 @@ A Helm chart to install the SPIRE server.
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |
+| serviceAccountAllowed | string | `""` |  |
 | telemetry.prometheus.enabled | bool | `false` |  |
 | tolerations | list | `[]` |  |
 | topologySpreadConstraints | list | `[]` |  |
@@ -89,5 +90,9 @@ A Helm chart to install the SPIRE server.
 | upstreamAuthority.disk.secret.create | bool | `true` | If disabled requires you to create a secret with the given keys (certificate, key and optional bundle) yourself. |
 | upstreamAuthority.disk.secret.data | object | `{"bundle":"","certificate":"","key":""}` | If secret creation is enabled, will create a secret with following certificate info |
 | upstreamAuthority.disk.secret.name | string | `"spiffe-upstream-ca"` | If secret creation is disabled, the secret with this name will be used. |
+| upstreamAuthority.spire.enabled | bool | `false` |  |
+| upstreamAuthority.spire.server.address | string | `""` |  |
+| upstreamAuthority.spire.server.port | int | `8081` |  |
+| upstreamAuthority.spire.upstreamDriver | string | `"upstream.csi.spiffe.io"` |  |
 
 ----------------------------------------------

@@ -40,7 +40,7 @@ data:
         plugin_data {
           clusters = {
             {{ .Values.clusterName | quote }} = {
-              service_account_allow_list = ["{{ .Release.Namespace }}:{{ .Release.Name }}-agent"]
+              service_account_allow_list = [{{ .Values.serviceAccountAllowed | default (printf "%s:%s-agent-main" .Release.Namespace .Release.Name) | quote}}]
             }
           }
         }
@@ -68,6 +68,18 @@ data:
           {{- if ne .secret.data.bundle "" }}
           bundle_file_path = "/run/spire/upstream_ca/bundle.crt"
           {{- end }}
+        }
+      }
+      {{- end }}
+      {{- end }}
+
+      {{- with .Values.upstreamAuthority.spire }}
+      {{- if eq (.enabled | toString) "true" }}
+      UpstreamAuthority "spire" {
+        plugin_data {
+          server_address      = {{ .server.address | quote }}
+          server_port         = {{ .server.port }}
+          workload_api_socket = "/run/spire/upstream_agent/spire-agent.sock"
         }
       }
       {{- end }}

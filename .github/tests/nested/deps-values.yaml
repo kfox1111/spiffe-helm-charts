@@ -1,0 +1,11 @@
+spire-server:
+  controllerManager:
+    enabled: false
+  serviceAccountAllowed: "nested:spire-agent-upstream"
+
+agent-main:
+  enabled: false
+
+csi-driver-main:
+  enabled: false
+

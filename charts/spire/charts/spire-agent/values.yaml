@@ -58,6 +58,7 @@ trustDomain: example.org
 bundleConfigMap: spire-bundle
 
 server:
+  address: ""
   port: 8081
 
 healthChecks:
@@ -83,6 +84,12 @@ telemetry:
   prometheus:
     enabled: false
     port: 9988
+
+# -- Override where the agent looks for the socket. Only used if socketMacroName is unchanged.
+agentSocketPath: /run/spire/agent-sockets/spire-agent.sock
+
+# @ignored
+socketMacroName: spire-agent.agent-socket-path-standalone
 
 # -- Priority class assigned to daemonset pods
 priorityClassName: ""
