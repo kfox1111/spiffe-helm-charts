@@ -1,4 +1,4 @@
-{{-/* Template out all the built in settings to yaml in prep for merging with user specified plugin config. */
+{{/* Template out all the built in settings to yaml in prep for merging with user specified plugin config. */}}
 {{- define "spire-server.config-plugins-template" }}
 {{ $namespace := .Release.Namespace }}
 DataStore:
@@ -52,12 +52,12 @@ UpstreamAuthority:
 
 {{- end }}
 
-{{-/* Template out the config file while reformatting the merged plugin config into way spire expects. */
+{{/* Template out the config file while reformatting the merged plugin config into way spire expects. */}}
 {{- define "spire-server.config-main-template" }}
 {{- $pluginsStruct := tpl (include "spire-server.config-plugins-template" . ) . | fromYaml }}
 {{- $pluginsMerged := $pluginsStruct | mustMerge .Values.plugins }}
 
-{{/* Section to validate user provided values are still sane for deployment */
+{{/* Section to validate user provided values are still sane for deployment */}}
 {{- if gt (len $pluginsMerged.DataStore) 1 }}
 {{- fail "You can only have one DataStore configured" }}
 {{- end }}
