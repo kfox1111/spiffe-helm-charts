@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.6.0](https://img.shields.io/badge/AppVersion-1.6.0-informational?style=flat-square)
+![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.5.4](https://img.shields.io/badge/AppVersion-1.5.4-informational?style=flat-square)
 
 A Helm chart to install the SPIRE server.
 
@@ -23,10 +23,17 @@ A Helm chart to install the SPIRE server.
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | bundleConfigMap | string | `"spire-server"` |  |
-| ca_subject.common_name | string | `"example.org"` |  |
-| ca_subject.country | string | `"NL"` |  |
-| ca_subject.organization | string | `"Example"` |  |
 | clusterName | string | `"example-cluster"` |  |
+| config.ca_key_type | string | `"rsa-2048"` |  |
+| config.ca_subject[0].common_name | string | `"example.org"` |  |
+| config.ca_subject[0].country[0] | string | `"NL"` |  |
+| config.ca_subject[0].organization[0] | string | `"Example"` |  |
+| config.data_dir | string | `"/run/spire/data"` |  |
+| config.default_jwt_svid_ttl | string | `"1h"` |  |
+| config.default_x509_svid_ttl | string | `"1h"` |  |
+| config.jwt_issuer | string | `"oidc-discovery.example.org"` |  |
+| config.log_level | string | `"info"` |  |
+| config.trust_domain | string | `"example.org"` |  |
 | controllerManager.enabled | bool | `false` |  |
 | controllerManager.identities.dnsNameTemplates | list | `[]` |  |
 | controllerManager.identities.enabled | bool | `true` |  |
@@ -59,10 +66,9 @@ A Helm chart to install the SPIRE server.
 | image.version | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
 | initContainers | list | `[]` |  |
-| jwtIssuer | string | `"oidc-discovery.example.org"` |  |
-| logLevel | string | `"info"` |  |
 | nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` |  |
+| plugins | object | `{}` |  |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
 | replicaCount | int | `1` | SPIRE server currently runs with a sqlite database. Scaling to multiple instances will not work until we use an external database. |
@@ -77,7 +83,6 @@ A Helm chart to install the SPIRE server.
 | telemetry.prometheus.enabled | bool | `false` |  |
 | tolerations | list | `[]` |  |
 | topologySpreadConstraints | list | `[]` |  |
-| trustDomain | string | `"example.org"` |  |
 | upstreamAuthority.certManager.enabled | bool | `false` |  |
 | upstreamAuthority.certManager.issuer_group | string | `"cert-manager.io"` |  |
 | upstreamAuthority.certManager.issuer_kind | string | `"Issuer"` |  |
